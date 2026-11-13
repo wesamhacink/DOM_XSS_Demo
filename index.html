@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM-Based XSS Demo</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .container {
+            background-color: white;
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .unsafe {
+            background-color: #dc3545;
+        }
+
+        .safe {
+            background-color: #198754;
+        }
+
+        #output {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #eeeeee;
+            min-height: 50px;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>DOM-Based XSS Demo</h2>
+
+        <p>Enter your text below:</p>
+
+        <input
+            type="text"
+            id="userInput"
+            placeholder="Enter text or XSS payload"
+        >
+
+        <br>
+
+        <button class="unsafe" onclick="unsafeDisplay()">
+            Unsafe Display
+        </button>
+
+        <button class="safe" onclick="safeDisplay()">
+            Safe Display
+        </button>
+
+        <h3>Output:</h3>
+
+        <div id="output"></div>
+
+    </div>
+
+    <script>
+
+        function unsafeDisplay() {
+
+            let input = document.getElementById("userInput").value;
+
+            document.getElementById("output").innerHTML = input;
+
+        }
+
+        function safeDisplay() {
+
+            let input = document.getElementById("userInput").value;
+
+            document.getElementById("output").textContent = input;
+
+        }
+
+    </script>
+
+</body>
+</html>
